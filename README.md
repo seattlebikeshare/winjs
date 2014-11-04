@@ -10,3 +10,6 @@
 ## References
 * https://help.github.com/articles/github-flavored-markdown/
 * https://help.github.com/articles/writing-on-github/
+
+## Attribution
+Bicycle logo design by [Darren Dutch](http://www.thenounproject.com/dis4) from the [Noun Project](http://www.thenounproject.com")
