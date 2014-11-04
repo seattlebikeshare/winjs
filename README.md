@@ -1,4 +1,7 @@
 # seattle bike share winjs version 0.0.0.1
+[![Build status](https://ci.appveyor.com/api/projects/status/5bw39nun9mjpr2w3?svg=true)](https://ci.appveyor.com/project/aaronwro/winjs)
+
+
 
 ## Getting started
 
