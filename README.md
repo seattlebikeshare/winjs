@@ -1,4 +1,4 @@
-# winphone version 0.0.0.1
+# seattle bike share winjs version 0.0.0.1
 
 ## Getting started
 
