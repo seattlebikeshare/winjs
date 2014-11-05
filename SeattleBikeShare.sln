@@ -5,17 +5,17 @@ VisualStudioVersion = 12.0.30723.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "SharedApp", "SharedApp", "{598BFD1E-9E68-4FB5-B8B4-FAE83A69970A}"
 EndProject
-Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SeattleBikeShare.Shared", "SeattleBikeShare\SeattleBikeShare.Shared\SeattleBikeShare.Shared.shproj", "{29D67F9B-C85D-435F-A0A8-2533E285A7DD}"
+Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "SeattleBikeShare.Shared", "SeattleBikeShare.Shared\SeattleBikeShare.Shared.shproj", "{29D67F9B-C85D-435F-A0A8-2533E285A7DD}"
 EndProject
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "SeattleBikeShare.Windows", "SeattleBikeShare\SeattleBikeShare.Windows\SeattleBikeShare.Windows.jsproj", "{CBEBA094-D99F-456B-9DD0-9274CFFE989C}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "SeattleBikeShare.Windows", "SeattleBikeShare.Windows\SeattleBikeShare.Windows.jsproj", "{CBEBA094-D99F-456B-9DD0-9274CFFE989C}"
 EndProject
-Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "SeattleBikeShare.WindowsPhone", "SeattleBikeShare\SeattleBikeShare.WindowsPhone\SeattleBikeShare.WindowsPhone.jsproj", "{13CC6E85-C784-4892-AFB7-7A144332AF41}"
+Project("{262852C6-CD72-467D-83FE-5EEB1973A190}") = "SeattleBikeShare.WindowsPhone", "SeattleBikeShare.WindowsPhone\SeattleBikeShare.WindowsPhone.jsproj", "{13CC6E85-C784-4892-AFB7-7A144332AF41}"
 EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
-		SeattleBikeShare\SeattleBikeShare.Shared\SeattleBikeShare.Shared.projitems*{cbeba094-d99f-456b-9dd0-9274cffe989c}*SharedItemsImports = 5
-		SeattleBikeShare\SeattleBikeShare.Shared\SeattleBikeShare.Shared.projitems*{13cc6e85-c784-4892-afb7-7a144332af41}*SharedItemsImports = 5
-		SeattleBikeShare\SeattleBikeShare.Shared\SeattleBikeShare.Shared.projitems*{29d67f9b-c85d-435f-a0a8-2533e285a7dd}*SharedItemsImports = 13
+		SeattleBikeShare.Shared\SeattleBikeShare.Shared.projitems*{cbeba094-d99f-456b-9dd0-9274cffe989c}*SharedItemsImports = 5
+		SeattleBikeShare.Shared\SeattleBikeShare.Shared.projitems*{13cc6e85-c784-4892-afb7-7a144332af41}*SharedItemsImports = 5
+		SeattleBikeShare.Shared\SeattleBikeShare.Shared.projitems*{29d67f9b-c85d-435f-a0a8-2533e285a7dd}*SharedItemsImports = 13
 	EndGlobalSection
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
