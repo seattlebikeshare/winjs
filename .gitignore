@@ -38,6 +38,8 @@ dlldata.c
 *_p.c
 *_i.h
 *.ilk
+*.js
+*.js.map
 *.meta
 *.obj
 *.pch

@@ -5,7 +5,4 @@
     <HasSharedItems>true</HasSharedItems>
     <SharedGUID>29d67f9b-c85d-435f-a0a8-2533e285a7dd</SharedGUID>
   </PropertyGroup>
-  <ItemGroup>
-    <Content Include="$(MSBuildThisFileDirectory)js\default.js" />
-  </ItemGroup>
 </Project>

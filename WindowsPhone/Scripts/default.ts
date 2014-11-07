@@ -1,4 +1,7 @@
-﻿// For an introduction to the Blank template, see the following documentation:
+﻿/// <reference path="typings/winjs/winjs-2.1.d.ts" />
+/// <reference path="typings/winrt/winrt.d.ts" />
+
+// For an introduction to the Blank template, see the following documentation:
 // http://go.microsoft.com/fwlink/?LinkID=392286
 (function () {
     "use strict";
@@ -6,7 +9,7 @@
     var app = WinJS.Application;
     var activation = Windows.ApplicationModel.Activation;
 
-    app.onactivated = function (args) {
+    app.onactivated = function (args : any) {
         console.log('hello world!'); // note: alert('') doesn't work, garbage.
         if (args.detail.kind === activation.ActivationKind.launch) {
             if (args.detail.previousExecutionState !== activation.ApplicationExecutionState.terminated) {
