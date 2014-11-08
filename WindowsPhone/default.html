@@ -4,10 +4,10 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>SeattleBikeShare.WindowsPhone</title>
-    <link href="/Content/bootstrap.min.css" rel="stylesheet" />
+    <link href="/Content/bootstrap.css" rel="stylesheet" />
 
     <!-- WinJS references -->
-    <!-- At runtime, ui-themed.css resolves to ui-themed.light.css or ui-themed.dark.css 
+    <!-- At runtime, ui-themed.css resolves to ui-themed.light.css or ui-themed.dark.css
     based on the user’s theme setting. This is part of the MRT resource loading functionality. -->
     <link href="/css/ui-themed.css" rel="stylesheet" />
     <script src="//Microsoft.Phone.WinJS.2.1/js/base.js"></script>
@@ -18,11 +18,32 @@
     <script src="/js/default.js"></script>
 </head>
 <body class="phone">
-    <script src="/Scripts/jquery-2.1.1.js"></script>
-    <script src="/Scripts/bootstrap.js">
-    </script>
-    <div class="jumbotron">
-        <h1>Hello world!</h1>
+    <div class="container">
+        <div class="jumbotron">
+            <h1>Seattle Bike Share</h1>
+        </div>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Station</th>
+                    <th>Availability</th>
+                </tr>
+            </thead>
+            <tr>
+                <td>Station 1</td>
+                <td>5 / 10</td>
+            </tr>
+            <tr>
+                <td>Station 2</td>
+                <td>7 / 10</td>
+            </tr>
+            <tr>
+                <td>Station 3</td>
+                <td>5 / 20</td>
+            </tr>
+        </table>
     </div>
+    <script src="/Scripts/jquery-2.1.1.js"></script>
+    <script src="/Scripts/bootstrap.js"></script>
 </body>
 </html>
