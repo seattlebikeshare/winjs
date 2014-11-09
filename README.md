@@ -1,4 +1,4 @@
-# seattle bike share winjs version 0.0.0.1
+# Seattle Bike Share
 [![Build status](https://ci.appveyor.com/api/projects/status/5bw39nun9mjpr2w3?svg=true)](https://ci.appveyor.com/project/aaronwro/winjs)
 
 
@@ -7,7 +7,6 @@
 
 1. Install Visual Studio Ultimate 2013 Update 3
 2. Install Windows Phone 8.1 Update 1 Emulators http://go.microsoft.com/fwlink/p/?LinkId=517214
-3.
 
 ## Trello Board
 https://trello.com/b/vQrKRyVh/seattle-bike-share
