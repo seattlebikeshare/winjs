@@ -1,4 +1,5 @@
 # appveyor.yml reference: http://www.appveyor.com/docs/appveyor-yml
+# encrypted secure auth_token here: https://ci.appveyor.com/tools/encrypt
 # Notes:
 #   - Minimal appveyor.yml file is an empty file. All sections are optional.
 #   - Indent each level of configuration with 2 spaces. Do not use tabs!
@@ -12,7 +13,7 @@
 notifications:
   - provider: Slack
     auth_token:
-      secure: xoxp-2931442554-2929932299-2976475448-d0d99f
+      secure: Ovcv1ubHaxGW4zQ3YP/6OX3X/UYxajZ59sXn6M5sqpIeGuslRA490KKxiHPCvJFN
     channel: github
     template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}>
 Commit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}:
