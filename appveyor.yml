@@ -1,0 +1,19 @@
+# appveyor.yml reference: http://www.appveyor.com/docs/appveyor-yml
+# Notes:
+#   - Minimal appveyor.yml file is an empty file. All sections are optional.
+#   - Indent each level of configuration with 2 spaces. Do not use tabs!
+#   - All section names are case-sensitive.
+#   - Section names should be unique on each level.
+
+#---------------------------------#
+#         notifications           #
+#---------------------------------#
+
+notifications:
+  - provider: Slack
+    auth_token:
+      secure: xoxp-2931442554-2929932299-2974965323-9284b1
+    channel: github
+    template: "<{{buildUrl}}|Build {{projectName}} {{buildVersion}} {{status}}>
+Commit <{{commitUrl}}|{{commitId}}> by {{commitAuthor}} on {{commitDate}}:
+_{{commitMessage}}_"
