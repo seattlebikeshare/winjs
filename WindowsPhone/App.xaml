@@ -8,10 +8,10 @@
         <ResourceDictionary>
             <ResourceDictionary.ThemeDictionaries>
                 <ResourceDictionary x:Key="Default">
-                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="Assets/HubBackground.png"/>
+                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="Assets/HubBackground.png" />
                 </ResourceDictionary>
                 <ResourceDictionary x:Key="HighContrast">
-                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="{x:Null}"/>
+                    <ImageBrush x:Key="HubBackgroundImageBrush" ImageSource="{x:Null}" />
                 </ResourceDictionary>
             </ResourceDictionary.ThemeDictionaries>
 

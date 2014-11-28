@@ -11,29 +11,8 @@ namespace SeattleBikeShare.WindowsPhone.Common
     /// </summary>
     public class ObservableDictionary : IObservableMap<string, object>
     {
-        private class ObservableDictionaryChangedEventArgs : IMapChangedEventArgs<string>
-        {
-            public ObservableDictionaryChangedEventArgs(CollectionChange change, string key)
-            {
-                this.CollectionChange = change;
-                this.Key = key;
-            }
-
-            public CollectionChange CollectionChange { get; private set; }
-            public string Key { get; private set; }
-        }
-
-        private Dictionary<string, object> _dictionary = new Dictionary<string, object>();
+        private readonly Dictionary<string, object> _dictionary = new Dictionary<string, object>();
         public event MapChangedEventHandler<string, object> MapChanged;
-
-        private void InvokeMapChanged(CollectionChange change, string key)
-        {
-            var eventHandler = MapChanged;
-            if (eventHandler != null)
-            {
-                eventHandler(this, new ObservableDictionaryChangedEventArgs(change, key));
-            }
-        }
 
         public void Add(string key, object value)
         {
@@ -70,10 +49,7 @@ namespace SeattleBikeShare.WindowsPhone.Common
 
         public object this[string key]
         {
-            get
-            {
-                return this._dictionary[key];
-            }
+            get { return this._dictionary[key]; }
             set
             {
                 this._dictionary[key] = value;
@@ -83,9 +59,9 @@ namespace SeattleBikeShare.WindowsPhone.Common
 
         public void Clear()
         {
-            var priorKeys = this._dictionary.Keys.ToArray();
+            string[] priorKeys = this._dictionary.Keys.ToArray();
             this._dictionary.Clear();
-            foreach (var key in priorKeys)
+            foreach (string key in priorKeys)
             {
                 this.InvokeMapChanged(CollectionChange.ItemRemoved, key);
             }
@@ -139,11 +115,33 @@ namespace SeattleBikeShare.WindowsPhone.Common
         public void CopyTo(KeyValuePair<string, object>[] array, int arrayIndex)
         {
             int arraySize = array.Length;
-            foreach (var pair in this._dictionary)
+            foreach (KeyValuePair<string, object> pair in this._dictionary)
             {
-                if (arrayIndex >= arraySize) break;
+                if (arrayIndex >= arraySize)
+                    break;
                 array[arrayIndex++] = pair;
             }
+        }
+
+        private void InvokeMapChanged(CollectionChange change, string key)
+        {
+            MapChangedEventHandler<string, object> eventHandler = this.MapChanged;
+            if (eventHandler != null)
+            {
+                eventHandler(this, new ObservableDictionaryChangedEventArgs(change, key));
+            }
+        }
+
+        private class ObservableDictionaryChangedEventArgs : IMapChangedEventArgs<string>
+        {
+            public ObservableDictionaryChangedEventArgs(CollectionChange change, string key)
+            {
+                this.CollectionChange = change;
+                this.Key = key;
+            }
+
+            public CollectionChange CollectionChange { get; private set; }
+            public string Key { get; private set; }
         }
     }
 }

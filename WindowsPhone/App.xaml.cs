@@ -1,21 +1,11 @@
-﻿using SeattleBikeShare.WindowsPhone.Common;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
+using SeattleBikeShare.WindowsPhone.Common;
 
 // The Hub Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -92,7 +82,7 @@ namespace SeattleBikeShare.WindowsPhone
                 if (rootFrame.ContentTransitions != null)
                 {
                     this.transitions = new TransitionCollection();
-                    foreach (var c in rootFrame.ContentTransitions)
+                    foreach (Transition c in rootFrame.ContentTransitions)
                     {
                         this.transitions.Add(c);
                     }
@@ -119,8 +109,9 @@ namespace SeattleBikeShare.WindowsPhone
         /// </summary>
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
-            var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
+            Frame rootFrame = sender as Frame;
+            rootFrame.ContentTransitions = this.transitions ??
+                new TransitionCollection {new NavigationThemeTransition()};
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
         }
 
@@ -133,7 +124,7 @@ namespace SeattleBikeShare.WindowsPhone
         /// <param name="e">Details about the suspend request.</param>
         private async void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
+            SuspendingDeferral deferral = e.SuspendingOperation.GetDeferral();
             await SuspensionManager.SaveAsync();
             deferral.Complete();
         }

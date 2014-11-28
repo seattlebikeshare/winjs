@@ -1,11 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Input;
-using Windows.System;
-using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
 using Windows.UI.Xaml.Navigation;
@@ -60,7 +54,11 @@ namespace SeattleBikeShare.WindowsPhone.Common
     public class NavigationHelper : DependencyObject
     {
         private Page Page { get; set; }
-        private Frame Frame { get { return this.Page.Frame; } }
+
+        private Frame Frame
+        {
+            get { return this.Page.Frame; }
+        }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NavigationHelper"/> class.
@@ -78,9 +76,9 @@ namespace SeattleBikeShare.WindowsPhone.Common
             this.Page.Loaded += (sender, e) =>
             {
 #if WINDOWS_PHONE_APP
-                Windows.Phone.UI.Input.HardwareButtons.BackPressed += HardwareButtons_BackPressed;
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed += this.HardwareButtons_BackPressed;
 #else
-                // Keyboard and mouse navigation only apply when occupying the entire window
+    // Keyboard and mouse navigation only apply when occupying the entire window
                 if (this.Page.ActualHeight == Window.Current.Bounds.Height &&
                     this.Page.ActualWidth == Window.Current.Bounds.Width)
                 {
@@ -97,7 +95,7 @@ namespace SeattleBikeShare.WindowsPhone.Common
             this.Page.Unloaded += (sender, e) =>
             {
 #if WINDOWS_PHONE_APP
-                Windows.Phone.UI.Input.HardwareButtons.BackPressed -= HardwareButtons_BackPressed;
+                Windows.Phone.UI.Input.HardwareButtons.BackPressed -= this.HardwareButtons_BackPressed;
 #else
                 Window.Current.CoreWindow.Dispatcher.AcceleratorKeyActivated -=
                     CoreDispatcher_AcceleratorKeyActivated;
@@ -109,8 +107,8 @@ namespace SeattleBikeShare.WindowsPhone.Common
 
         #region Navigation support
 
-        RelayCommand _goBackCommand;
-        RelayCommand _goForwardCommand;
+        private RelayCommand _goBackCommand;
+        private RelayCommand _goForwardCommand;
 
         /// <summary>
         /// <see cref="RelayCommand"/> used to bind to the back Button's Command property
@@ -124,19 +122,17 @@ namespace SeattleBikeShare.WindowsPhone.Common
         {
             get
             {
-                if (_goBackCommand == null)
+                if (this._goBackCommand == null)
                 {
-                    _goBackCommand = new RelayCommand(
+                    this._goBackCommand = new RelayCommand(
                         () => this.GoBack(),
                         () => this.CanGoBack());
                 }
-                return _goBackCommand;
+                return this._goBackCommand;
             }
-            set
-            {
-                _goBackCommand = value;
-            }
+            set { this._goBackCommand = value; }
         }
+
         /// <summary>
         /// <see cref="RelayCommand"/> used for navigating to the most recent item in 
         /// the forward navigation history, if a Frame manages its own navigation history.
@@ -148,13 +144,13 @@ namespace SeattleBikeShare.WindowsPhone.Common
         {
             get
             {
-                if (_goForwardCommand == null)
+                if (this._goForwardCommand == null)
                 {
-                    _goForwardCommand = new RelayCommand(
+                    this._goForwardCommand = new RelayCommand(
                         () => this.GoForward(),
                         () => this.CanGoForward());
                 }
-                return _goForwardCommand;
+                return this._goForwardCommand;
             }
         }
 
@@ -170,6 +166,7 @@ namespace SeattleBikeShare.WindowsPhone.Common
         {
             return this.Frame != null && this.Frame.CanGoBack;
         }
+
         /// <summary>
         /// Virtual method used by the <see cref="GoForwardCommand"/> property
         /// to determine if the <see cref="Frame"/> can go forward.
@@ -189,15 +186,18 @@ namespace SeattleBikeShare.WindowsPhone.Common
         /// </summary>
         public virtual void GoBack()
         {
-            if (this.Frame != null && this.Frame.CanGoBack) this.Frame.GoBack();
+            if (this.Frame != null && this.Frame.CanGoBack)
+                this.Frame.GoBack();
         }
+
         /// <summary>
         /// Virtual method used by the <see cref="GoForwardCommand"/> property
         /// to invoke the <see cref="Windows.UI.Xaml.Controls.Frame.GoForward"/> method.
         /// </summary>
         public virtual void GoForward()
         {
-            if (this.Frame != null && this.Frame.CanGoForward) this.Frame.GoForward();
+            if (this.Frame != null && this.Frame.CanGoForward)
+                this.Frame.GoForward();
         }
 
 #if WINDOWS_PHONE_APP
@@ -215,13 +215,13 @@ namespace SeattleBikeShare.WindowsPhone.Common
             }
         }
 #else
-        /// <summary>
-        /// Invoked on every keystroke, including system keys such as Alt key combinations, when
-        /// this page is active and occupies the entire window.  Used to detect keyboard navigation
-        /// between pages even when the page itself doesn't have focus.
-        /// </summary>
-        /// <param name="sender">Instance that triggered the event.</param>
-        /// <param name="e">Event data describing the conditions that led to the event.</param>
+    /// <summary>
+    /// Invoked on every keystroke, including system keys such as Alt key combinations, when
+    /// this page is active and occupies the entire window.  Used to detect keyboard navigation
+    /// between pages even when the page itself doesn't have focus.
+    /// </summary>
+    /// <param name="sender">Instance that triggered the event.</param>
+    /// <param name="e">Event data describing the conditions that led to the event.</param>
         private void CoreDispatcher_AcceleratorKeyActivated(CoreDispatcher sender,
             AcceleratorKeyEventArgs e)
         {
@@ -299,6 +299,7 @@ namespace SeattleBikeShare.WindowsPhone.Common
         /// state provided when recreating a page from a prior session.
         /// </summary>
         public event LoadStateEventHandler LoadState;
+
         /// <summary>
         /// Register this event on the current page to preserve
         /// state associated with the current page in case the
@@ -316,14 +317,14 @@ namespace SeattleBikeShare.WindowsPhone.Common
         /// property provides the group to be displayed.</param>
         public void OnNavigatedTo(NavigationEventArgs e)
         {
-            var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
+            Dictionary<string, object> frameState = SuspensionManager.SessionStateForFrame(this.Frame);
             this._pageKey = "Page-" + this.Frame.BackStackDepth;
 
             if (e.NavigationMode == NavigationMode.New)
             {
                 // Clear existing state for forward navigation when adding a new page to the
                 // navigation stack
-                var nextPageKey = this._pageKey;
+                string nextPageKey = this._pageKey;
                 int nextPageIndex = this.Frame.BackStackDepth;
                 while (frameState.Remove(nextPageKey))
                 {
@@ -344,7 +345,8 @@ namespace SeattleBikeShare.WindowsPhone.Common
                 // from cache
                 if (this.LoadState != null)
                 {
-                    this.LoadState(this, new LoadStateEventArgs(e.Parameter, (Dictionary<String, Object>)frameState[this._pageKey]));
+                    this.LoadState(this,
+                        new LoadStateEventArgs(e.Parameter, (Dictionary<String, Object>) frameState[this._pageKey]));
                 }
             }
         }
@@ -358,13 +360,13 @@ namespace SeattleBikeShare.WindowsPhone.Common
         /// property provides the group to be displayed.</param>
         public void OnNavigatedFrom(NavigationEventArgs e)
         {
-            var frameState = SuspensionManager.SessionStateForFrame(this.Frame);
-            var pageState = new Dictionary<String, Object>();
+            Dictionary<string, object> frameState = SuspensionManager.SessionStateForFrame(this.Frame);
+            Dictionary<string, object> pageState = new Dictionary<String, Object>();
             if (this.SaveState != null)
             {
                 this.SaveState(this, new SaveStateEventArgs(pageState));
             }
-            frameState[_pageKey] = pageState;
+            frameState[this._pageKey] = pageState;
         }
 
         #endregion
@@ -374,6 +376,7 @@ namespace SeattleBikeShare.WindowsPhone.Common
     /// Represents the method that will handle the <see cref="NavigationHelper.LoadState"/>event
     /// </summary>
     public delegate void LoadStateEventHandler(object sender, LoadStateEventArgs e);
+
     /// <summary>
     /// Represents the method that will handle the <see cref="NavigationHelper.SaveState"/>event
     /// </summary>
@@ -384,17 +387,6 @@ namespace SeattleBikeShare.WindowsPhone.Common
     /// </summary>
     public class LoadStateEventArgs : EventArgs
     {
-        /// <summary>
-        /// The parameter value passed to <see cref="Frame.Navigate(Type, Object)"/> 
-        /// when this page was initially requested.
-        /// </summary>
-        public Object NavigationParameter { get; private set; }
-        /// <summary>
-        /// A dictionary of state preserved by this page during an earlier
-        /// session.  This will be null the first time a page is visited.
-        /// </summary>
-        public Dictionary<string, Object> PageState { get; private set; }
-
         /// <summary>
         /// Initializes a new instance of the <see cref="LoadStateEventArgs"/> class.
         /// </summary>
@@ -407,30 +399,41 @@ namespace SeattleBikeShare.WindowsPhone.Common
         /// session.  This will be null the first time a page is visited.
         /// </param>
         public LoadStateEventArgs(Object navigationParameter, Dictionary<string, Object> pageState)
-            : base()
         {
             this.NavigationParameter = navigationParameter;
             this.PageState = pageState;
         }
+
+        /// <summary>
+        /// The parameter value passed to <see cref="Frame.Navigate(Type, Object)"/> 
+        /// when this page was initially requested.
+        /// </summary>
+        public Object NavigationParameter { get; private set; }
+
+        /// <summary>
+        /// A dictionary of state preserved by this page during an earlier
+        /// session.  This will be null the first time a page is visited.
+        /// </summary>
+        public Dictionary<string, Object> PageState { get; private set; }
     }
+
     /// <summary>
     /// Class used to hold the event data required when a page attempts to save state.
     /// </summary>
     public class SaveStateEventArgs : EventArgs
     {
         /// <summary>
-        /// An empty dictionary to be populated with serializable state.
-        /// </summary>
-        public Dictionary<string, Object> PageState { get; private set; }
-
-        /// <summary>
         /// Initializes a new instance of the <see cref="SaveStateEventArgs"/> class.
         /// </summary>
         /// <param name="pageState">An empty dictionary to be populated with serializable state.</param>
         public SaveStateEventArgs(Dictionary<string, Object> pageState)
-            : base()
         {
             this.PageState = pageState;
         }
+
+        /// <summary>
+        /// An empty dictionary to be populated with serializable state.
+        /// </summary>
+        public Dictionary<string, Object> PageState { get; private set; }
     }
 }

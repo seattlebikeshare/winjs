@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Input;
 
 namespace SeattleBikeShare.WindowsPhone.Common
@@ -16,13 +12,8 @@ namespace SeattleBikeShare.WindowsPhone.Common
     /// </summary>
     public class RelayCommand : ICommand
     {
-        private readonly Action _execute;
         private readonly Func<bool> _canExecute;
-
-        /// <summary>
-        /// Raised when RaiseCanExecuteChanged is called.
-        /// </summary>
-        public event EventHandler CanExecuteChanged;
+        private readonly Action _execute;
 
         /// <summary>
         /// Creates a new command that can always execute.
@@ -42,9 +33,14 @@ namespace SeattleBikeShare.WindowsPhone.Common
         {
             if (execute == null)
                 throw new ArgumentNullException("execute");
-            _execute = execute;
-            _canExecute = canExecute;
+            this._execute = execute;
+            this._canExecute = canExecute;
         }
+
+        /// <summary>
+        /// Raised when RaiseCanExecuteChanged is called.
+        /// </summary>
+        public event EventHandler CanExecuteChanged;
 
         /// <summary>
         /// Determines whether this <see cref="RelayCommand"/> can execute in its current state.
@@ -55,7 +51,7 @@ namespace SeattleBikeShare.WindowsPhone.Common
         /// <returns>true if this command can be executed; otherwise, false.</returns>
         public bool CanExecute(object parameter)
         {
-            return _canExecute == null ? true : _canExecute();
+            return this._canExecute == null ? true : this._canExecute();
         }
 
         /// <summary>
@@ -66,7 +62,7 @@ namespace SeattleBikeShare.WindowsPhone.Common
         /// </param>
         public void Execute(object parameter)
         {
-            _execute();
+            this._execute();
         }
 
         /// <summary>
@@ -76,7 +72,7 @@ namespace SeattleBikeShare.WindowsPhone.Common
         /// </summary>
         public void RaiseCanExecuteChanged()
         {
-            var handler = CanExecuteChanged;
+            EventHandler handler = this.CanExecuteChanged;
             if (handler != null)
             {
                 handler(this, EventArgs.Empty);

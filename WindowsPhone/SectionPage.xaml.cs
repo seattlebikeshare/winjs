@@ -1,21 +1,9 @@
-﻿using SeattleBikeShare.WindowsPhone.Common;
-using SeattleBikeShare.WindowsPhone.Data;
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+﻿using System;
 using Windows.ApplicationModel.Resources;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
-using Windows.Graphics.Display;
-using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using SeattleBikeShare.WindowsPhone.Common;
+using SeattleBikeShare.WindowsPhone.Data;
 
 // The Hub Application template is documented at http://go.microsoft.com/fwlink/?LinkId=391641
 
@@ -23,8 +11,8 @@ namespace SeattleBikeShare.WindowsPhone
 {
     public sealed partial class SectionPage : Page
     {
-        private readonly NavigationHelper navigationHelper;
         private readonly ObservableDictionary defaultViewModel = new ObservableDictionary();
+        private readonly NavigationHelper navigationHelper;
 
         public SectionPage()
         {
@@ -66,7 +54,7 @@ namespace SeattleBikeShare.WindowsPhone
         private async void NavigationHelper_LoadState(object sender, LoadStateEventArgs e)
         {
             // TODO: Create an appropriate data model for your problem domain to replace the sample data.
-            var group = await SampleDataSource.GetGroupAsync((string)e.NavigationParameter);
+            SampleDataGroup group = await SampleDataSource.GetGroupAsync((string) e.NavigationParameter);
             this.DefaultViewModel["Group"] = group;
         }
 
@@ -90,10 +78,10 @@ namespace SeattleBikeShare.WindowsPhone
         /// <param name="e">Event data that describes the item clicked.</param>
         private void ItemView_ItemClick(object sender, ItemClickEventArgs e)
         {
-            var itemId = ((SampleDataItem)e.ClickedItem).UniqueId;
-            if (!Frame.Navigate(typeof(ItemPage), itemId))
+            string itemId = ((SampleDataItem) e.ClickedItem).UniqueId;
+            if (!this.Frame.Navigate(typeof(ItemPage), itemId))
             {
-                var resourceLoader = ResourceLoader.GetForCurrentView("Resources");
+                ResourceLoader resourceLoader = ResourceLoader.GetForCurrentView("Resources");
                 throw new Exception(resourceLoader.GetString("NavigationFailedExceptionMessage"));
             }
         }
