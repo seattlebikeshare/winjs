@@ -1,0 +1,40 @@
+﻿{
+    "BikeStations": [
+        {
+            "Id": 1,
+            "Name": "Westlake & Denny",
+            "Capacity": 12,
+            "BikesAvailable": 7
+        },
+        {
+            "Id": 2,
+            "Name": "Steward & John",
+            "Capacity": 10,
+            "BikesAvailable": 10
+        },
+        {
+            "Id": 3,
+            "Name": "7th & Monroe",
+            "Capacity": 12,
+            "BikesAvailable": 5
+        },
+        {
+            "Id": 4,
+            "Name": "Jefferson & Washington",
+            "Capacity": 8,
+            "BikesAvailable": 7
+        },
+        {
+            "Id": 5,
+            "Name": "Speckle & Drake",
+            "Capacity": 10,
+            "BikesAvailable": 10
+        },
+        {
+            "Id": 6,
+            "Name": "Alex & Aaron",
+            "Capacity": 8,
+            "BikesAvailable": 0
+        }
+    ]
+}

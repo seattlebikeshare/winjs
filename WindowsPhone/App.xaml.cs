@@ -1,18 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
+using System.Diagnostics;
 using Windows.ApplicationModel;
 using Windows.ApplicationModel.Activation;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Media.Animation;
 using Windows.UI.Xaml.Navigation;
 
@@ -23,9 +14,9 @@ namespace SeattleBikeShare.WindowsPhone
     /// <summary>
     /// Provides application-specific behavior to supplement the default Application class.
     /// </summary>
-    public sealed partial class App : Application
+    public sealed partial class App
     {
-        private TransitionCollection transitions;
+        private TransitionCollection _transitions;
 
         /// <summary>
         /// Initializes the singleton application object.  This is the first line of authored code
@@ -46,7 +37,7 @@ namespace SeattleBikeShare.WindowsPhone
         protected override void OnLaunched(LaunchActivatedEventArgs e)
         {
 #if DEBUG
-            if (System.Diagnostics.Debugger.IsAttached)
+            if (Debugger.IsAttached)
             {
                 this.DebugSettings.EnableFrameRateCounter = true;
             }
@@ -59,11 +50,10 @@ namespace SeattleBikeShare.WindowsPhone
             if (rootFrame == null)
             {
                 // Create a Frame to act as the navigation context and navigate to the first page
-                rootFrame = new Frame();
-
                 // TODO: change this value to a cache size that is appropriate for your application
-                rootFrame.CacheSize = 1;
+                rootFrame = new Frame { CacheSize = 1 };
 
+                
                 if (e.PreviousExecutionState == ApplicationExecutionState.Terminated)
                 {
                     // TODO: Load state from previously suspended application
@@ -78,10 +68,10 @@ namespace SeattleBikeShare.WindowsPhone
                 // Removes the turnstile navigation for startup.
                 if (rootFrame.ContentTransitions != null)
                 {
-                    this.transitions = new TransitionCollection();
-                    foreach (var c in rootFrame.ContentTransitions)
+                    this._transitions = new TransitionCollection();
+                    foreach (Transition c in rootFrame.ContentTransitions)
                     {
-                        this.transitions.Add(c);
+                        this._transitions.Add(c);
                     }
                 }
 
@@ -108,8 +98,10 @@ namespace SeattleBikeShare.WindowsPhone
         /// <param name="e">Details about the navigation event.</param>
         private void RootFrame_FirstNavigated(object sender, NavigationEventArgs e)
         {
-            var rootFrame = sender as Frame;
-            rootFrame.ContentTransitions = this.transitions ?? new TransitionCollection() { new NavigationThemeTransition() };
+            Frame rootFrame = sender as Frame;
+            Debug.Assert(rootFrame != null, "rootFrame != null");
+
+            rootFrame.ContentTransitions = this._transitions ?? new TransitionCollection { new NavigationThemeTransition() };
             rootFrame.Navigated -= this.RootFrame_FirstNavigated;
         }
 
@@ -122,7 +114,7 @@ namespace SeattleBikeShare.WindowsPhone
         /// <param name="e">Details about the suspend request.</param>
         private void OnSuspending(object sender, SuspendingEventArgs e)
         {
-            var deferral = e.SuspendingOperation.GetDeferral();
+            SuspendingDeferral deferral = e.SuspendingOperation.GetDeferral();
 
             // TODO: Save application state and stop any background activity
             deferral.Complete();
