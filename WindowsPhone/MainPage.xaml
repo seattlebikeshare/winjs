@@ -12,23 +12,6 @@
     d:DataContext="{Binding Source={d:DesignData Source=./DataModel/SampleData.json, Type=SeattleBikeShare.WindowsPhone.DataModel.BikeShareViewModel}}"
     Loaded="Page_Loaded">
 
-    <!--<StackPanel DataContext="{Binding}">
-        <ListView DataContext="{Binding}">
-            <DataTemplate>
-                <ListView 
-                    ItemsSource="{Binding ElementName=BikeStations}">
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <StackPanel>
-                                <TextBlock 
-                                    Text="{Binding Name}"/>
-                            </StackPanel>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                </ListView>
-            </DataTemplate>
-        </ListView>
-    </StackPanel>-->
     <Grid>
         <!--<TextBlock Text="{Binding BikeStations[0]}"></TextBlock>-->
         <Hub Header="seattle bike share">

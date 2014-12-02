@@ -10,13 +10,10 @@ namespace SeattleBikeShare.WindowsPhone
     /// </summary>
     public sealed partial class MainPage
     {
-        private readonly IBikeShareDataSource _dataSource;
-
         public MainPage()
         {
             this.InitializeComponent();
-            this._dataSource = new SampleDataSource();
-            this.ViewModel = this._dataSource.ViewModelData;
+            this.ViewModel = new BikeShareViewModel();
             this.NavigationCacheMode = NavigationCacheMode.Required;
         }
 
@@ -40,7 +37,7 @@ namespace SeattleBikeShare.WindowsPhone
 
         private async void Page_Loaded(object sender, Windows.UI.Xaml.RoutedEventArgs e)
         {
-            await this._dataSource.RefreshData();
+            await this.ViewModel.Refresh();
         }
     }
 }
