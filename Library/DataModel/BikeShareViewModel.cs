@@ -2,9 +2,10 @@
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using SeattleBikeShare.WindowsPhone.Annotations;
+using System.Threading.Tasks;
+using SeattleBikeShare.Library.Annotations;
 
-namespace SeattleBikeShare.WindowsPhone.DataModel
+namespace SeattleBikeShare.Library.DataModel
 {
     /// <summary>
     /// Main view model to feed into the view.
@@ -24,17 +25,16 @@ namespace SeattleBikeShare.WindowsPhone.DataModel
         [NotifyPropertyChangedInvocator]
         protected virtual void OnPropertyChanged([CallerMemberName] string propertyName = null)
         {
-            PropertyChangedEventHandler handler = PropertyChanged;
+            PropertyChangedEventHandler handler = this.PropertyChanged;
             if (handler != null)
             {
                 handler(this, new PropertyChangedEventArgs(propertyName));
             }
         }
-    }
 
-    public class SampleViewModel2
-    {
-        public string Name { get; set; }
-        public string Title { get; set; }
+        public Task Refresh()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

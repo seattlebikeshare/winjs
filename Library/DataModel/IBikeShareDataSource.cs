@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace SeattleBikeShare.WindowsPhone.DataModel
+namespace SeattleBikeShare.Library.DataModel
 {
     /// <summary>
     /// Data source interface for pulling bike share data into the view model.

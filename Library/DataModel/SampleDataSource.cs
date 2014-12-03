@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using Windows.Storage;
 using Newtonsoft.Json;
 
-namespace SeattleBikeShare.WindowsPhone.DataModel
+namespace SeattleBikeShare.Library.DataModel
 {
     public class SampleDataSource : IBikeShareDataSource
     {

@@ -1,4 +1,4 @@
-namespace SeattleBikeShare.WindowsPhone.DataModel
+namespace SeattleBikeShare.Library.DataModel
 {
     public class BikeStation
     {

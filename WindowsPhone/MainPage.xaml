@@ -3,17 +3,16 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:local="using:SeattleBikeShare.WindowsPhone"
-    xmlns:data="using:SeattleBikeShare.WindowsPhone.DataModel"
+    xmlns:data="using:SeattleBikeShare.Library.DataModel"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}"
     DataContext="{Binding ViewModel, RelativeSource={RelativeSource Self}}" 
-    d:DataContext="{Binding Source={d:DesignData Source=./DataModel/SampleData.json, Type=SeattleBikeShare.WindowsPhone.DataModel.BikeShareViewModel}}"
+    d:DataContext="{Binding Source={d:DesignData Source=./DataModel/SampleData.json, Type=data:BikeShareViewModel}}"
     Loaded="Page_Loaded">
 
     <Grid>
-        <!--<TextBlock Text="{Binding BikeStations[0]}"></TextBlock>-->
         <Hub Header="seattle bike share">
             <HubSection DataContext="{Binding BikeStations}">
                 <DataTemplate>
@@ -28,8 +27,5 @@
                 </DataTemplate>
             </HubSection>
         </Hub>
-        <!--<StackPanel>
-        <TextBlock Text="{Binding Title}"></TextBlock>
-    </StackPanel>-->
     </Grid>
 </Page>
